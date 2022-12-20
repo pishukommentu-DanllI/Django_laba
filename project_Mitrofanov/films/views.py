@@ -81,40 +81,6 @@ def Delete(request, id):
     return redirect('home')
 
 
-
-class SingUp(CreateView):
-    form_class = UserCreationForm
-    template_name = 'films/SingUp.html'  # ссылка на шаблон (где хранится это html)
-    success_url = reverse_lazy('home')
-
-    def get_context_data(self, form=form_class, **kwargs):
-        return {'form': form, 'title': 'Registr'}
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('home')
-
-
-class Log(LoginView):
-    form_class = AuthenticationForm
-    template_name = 'films/Login.html/'
-    success_url = reverse_lazy('home')
-
-    def get_context_data(self, form=form_class, **kwargs):
-        return {'form': form, 'title': 'Log'}
-
-
-def profile(request):
-    return reverse_lazy('home')
-
-
-def Logout(request):
-    logout(request)
-    return redirect('home')
-
-
-
 def create_Category():
     if Category.objects.all().count() == 0:
         Category.objects.create(name='fanastic')

@@ -7,8 +7,10 @@
         <div>
             {% if request.user.is_authenticated %}
                 <a href="{% url 'Form' %}">Make film</a> | <a href="{% url 'Logout' %}">Logout</a>
+
             {% else %}
             <a href="{% url 'SingUp' %}">SingUp</a> | <a href="{% url 'Login' %}">Login</a>
+
             {% endif %}
         </div>
 
