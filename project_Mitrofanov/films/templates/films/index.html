@@ -1,0 +1,50 @@
+{% extends 'films/shablonu.html' %}
+
+{% block title %} Index {% endblock %}
+
+{% block content %}
+    <Nav class="Index_Nav">
+        <div>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'Form' %}">Make film</a> | <a href="{% url 'Logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'SingUp' %}">SingUp</a> | <a href="{% url 'Login' %}">Login</a>
+            {% endif %}
+        </div>
+
+    </Nav>
+    {% if  films.count > 0 %}
+        <div class="index_block_flex">
+            {% for film in films %}
+                <div class="index_margin">
+                    <p>Film:</p>
+                    <p>Name: {{film.name}}</p>
+                    <span>Category: </span>
+                    {% for i in film.category.all %}
+                        {% if i == film.category.last %}
+                            <span class=""> {{i.name}}</span>
+                        {% else %}
+                            <span> {{i.name}},</span>
+                        {% endif %}
+                    {% endfor %}
+                    <br>
+                    <p>Date_make: {{film.date_made}}</p>
+                    <p>Date_show: {{film.date_show}}</p>
+                    <p>Acture: {{film.acteru}}</p>
+
+                    <div class="btn">
+                    {% if request.user.is_authenticated %}
+                        <a href="edit/{{film.id}}">Edit</a> | <a href="delete/{{film.id}}">Delete</a>
+                    {% else %}
+                        <p>You can not change this film. Please <a href="{% url 'Login' %}">login</a></p>
+                    {% endif %}
+                </div>
+                </div>
+    <!--                <div>-->
+    <!--                    <a href="edit/{{i.id}}">Edit</a> | <a href="delete/{{i.id}}">Delete</a>-->
+    <!--                </div>-->
+            {% endfor %}
+
+        </div>
+    {% endif %}
+{% endblock %}

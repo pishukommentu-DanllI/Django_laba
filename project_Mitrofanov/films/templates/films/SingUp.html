@@ -1,0 +1,18 @@
+{% extends 'films/shablonu.html' %}
+
+{% block title %} Sing Up {% endblock %}
+
+{% block content %}
+    <h2>Singup</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+
+        <input type="submit" value="Sing Up">
+    </form>
+
+    <div class="btn">
+        <a href="{% url 'home' %}">Home</a> | <a href="{% url 'Login' %}">Login</a>
+    </div>
+{% endblock %}

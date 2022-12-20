@@ -1,0 +1,34 @@
+{% extends 'films/shablonu.html' %}
+
+{% block title %} Form {% endblock %}
+
+{% block content %}
+  <h2>Form for Order</h2>
+  {% if request.user.is_authenticated %}
+    <form method="post" class="form">
+      {% csrf_token %}
+      <div class="form__itme">
+      {{form.name.label}}{{form.name}}
+      </div>
+
+      <div class="form__itme">
+        {{form.Category.label}}{{form.Category}}
+      </div>
+
+      <div class="form__itme">
+        {{form.date_show.label}}{{form.date_show}}
+      </div>
+
+      <div class="form__itme">
+        {{form.acteru.label}}{{form.acteru}}<br>
+      </div>
+      
+      <div class="form_BlockBtn">
+        <button type="submit">Send</button> | <a href="{% url 'home' %}">Home</a>
+      </div>
+    </form>
+
+  {% else %}
+    <h2>You are not authenticated</h2>
+  {% endif %}
+{% endblock %}
